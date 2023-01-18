@@ -1,65 +1,40 @@
-# codex-manuscript-wordcount README
+# <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/logo_128.png" width=48>Codex Manuscript Wordcount
 
-This is the README for your extension "codex-manuscript-wordcount". After writing up a brief description, we recommend including the following sections.
+A VScode extension for counting the total word count of a manuscript split into multiple markdown files. It also includes a session word count and configurable manuscript and session goals.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Configurable document root
+- Session word count
+- Manuscript word count
+- Configurable manuscript and session goals
+- Does not count words between < and >
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+Search for `codex-manuscipt-wordcount` in the VScode extension marketplace and install it.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
 
-## Requirements
+After installation, the manuscript and session word counts will appear in the explorer. You can right-click on them to set the manuscript and session goals, as well as the document root where the manuscript is located. The extension will only count the words for Markdown documents under the document root.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+You can also reset the session or adjust the session start by right-clicking on the session count. Additionally, there is an option in the settings to automatically reset the session on restart, which is off by default.
 
-## Extension Settings
+All of these settings are stored in the workspace config, and you can edit them there. However, there is no validation when editing them manually, so it may cause issues.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Limitations
 
-For example:
+- Changing the document root while in the middle of a session may cause the session count to become inaccurate.
+- Only supports workspaces with one root.
 
-This extension contributes the following settings:
+## License
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+[MIT](https://choosealicense.com/licenses/mit/)
 
-## Known Issues
+## Related
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- [Codex Autocommit](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-autocommit&ssr=false#overview) - Automatically takes a snapshot of the manuscript every interval and stores it on a remote git server.
 
-## Release Notes
+## Author
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [@nephlm](https://www.github.com/nephlm)

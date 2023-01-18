@@ -2,22 +2,116 @@
   "name": "codex-manuscript-wordcount",
   "displayName": "codex-manuscript-wordcount",
   "description": "",
-  "version": "0.0.1",
+  "publisher": "ZenBrewismBooks",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:codex-manuscript-wordcount.helloWorld"
+  "keywords": [
+    "writing",
+    "wordcount",
+    "word count",
+    "writing tools",
+    "manuscript",
+    "session",
+    "book"
   ],
-  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:codex-manuscript-wordcount.show",
+    "onView:${id}"
+  ],
+  "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "codex-manuscript-wordcount.helloWorld",
-      "title": "Hello World"
-    }]
+    "views": {
+      "explorer": [
+        {
+          "id": "codex-manuscript-wordcount_view",
+          "name": "Session Target"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "properties": {
+          "codexManuscriptWordcount.defaultManuscriptGoal": {
+            "Title": "Default Manuscript Goal",
+            "type": "integer",
+            "default": 50000,
+            "description": "The default wordcount goal for new manuscripts.",
+            "minimum": 0
+          },
+          "codexManuscriptWordcount.defaultSessionGoal": {
+            "type": "integer",
+            "default": 1000,
+            "description": "The default wordcount goal for a new session, if you haven't changed it in the workspace.",
+            "minimum": 0
+          },
+          "codexManuscriptWordcount.defaultDocumentRoot": {
+            "type": "string",
+            "default": "",
+            "description": "The path to your manuscript, relative to the root of the workspace, it will default to the root of the workspace."
+          },
+          "codexManuscriptWordcount.resetSessionOnStart": {
+            "type": "boolean",
+            "default": false,
+            "description": "Should the session automatically reset when vscode is restarted or the window is reloaded?"
+          }
+        }
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "codex-manuscript-wordcount.resetSession",
+          "when": "view == codex-manuscript-wordcount_view && viewItem == session"
+        },
+        {
+          "command": "codex-manuscript-wordcount.setSessionStartCount",
+          "when": "view == codex-manuscript-wordcount_view && viewItem == session"
+        },
+        {
+          "command": "codex-manuscript-wordcount.setManuscriptGoal",
+          "when": "view == codex-manuscript-wordcount_view && viewItem == manuscript"
+        },
+        {
+          "command": "codex-manuscript-wordcount.setDocumentRoot",
+          "when": "view == codex-manuscript-wordcount_view && viewItem == manuscript"
+        },
+        {
+          "command": "codex-manuscript-wordcount.setSessionGoal",
+          "when": "view == codex-manuscript-wordcount_view && viewItem == session"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "codex-manuscript-wordcount.resetSession",
+        "title": "Reset Session"
+      },
+      {
+        "command": "codex-manuscript-wordcount.setSessionGoal",
+        "title": "Set Session Goal"
+      },
+      {
+        "command": "codex-manuscript-wordcount.setSessionStartCount",
+        "title": "Set Session Starting Count"
+      },
+      {
+        "command": "codex-manuscript-wordcount.setManuscriptGoal",
+        "title": "Set Manuscript Goal"
+      },
+      {
+        "command": "codex-manuscript-wordcount.setDocumentRoot",
+        "title": "Set Document Root"
+      },
+      {
+        "command": "codex-manuscript-wordcount.show",
+        "title": "Codex Manuscript Wordcount"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
