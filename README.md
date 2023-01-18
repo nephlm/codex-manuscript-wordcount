@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/logo_128.png" width=48>Codex Manuscript Wordcount
+# <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/logo.png" width=48>Codex Manuscript Wordcount
 
 A VScode extension for counting the total word count of a manuscript split into multiple markdown files. It also includes a session word count and configurable manuscript and session goals.
 
@@ -17,6 +17,8 @@ Search for `codex-manuscipt-wordcount` in the VScode extension marketplace and i
 ## Usage
 
 After installation, the manuscript and session word counts will appear in the explorer. You can right-click on them to set the manuscript and session goals, as well as the document root where the manuscript is located. The extension will only count the words for Markdown documents under the document root.
+
+<img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/screenshot.png" width=350>
 
 You can also reset the session or adjust the session start by right-clicking on the session count. Additionally, there is an option in the settings to automatically reset the session on restart, which is off by default.
 
@@ -37,4 +39,8 @@ All of these settings are stored in the workspace config, and you can edit them 
 
 ## Author
 
-- [@nephlm](https://www.github.com/nephlm)
+[@nephlm](https://www.github.com/nephlm)
+
+## Logo
+
+by [Lorc](https://game-icons.net/1x1/delapouite/abacus.html) under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
