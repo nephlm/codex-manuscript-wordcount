@@ -1,9 +1,11 @@
 {
   "name": "codex-manuscript-wordcount",
-  "displayName": "codex-manuscript-wordcount",
-  "description": "",
+  "displayName": "Codex Manuscript Wordcount",
+  "description": "Show manuscript and session word counts and goals.",
   "publisher": "ZenBrewismBooks",
   "version": "0.2.0",
+  "repository": "https://github.com/nephlm/codex-manuscript-wordcount",
+  "icon": "logo.png",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -17,11 +19,14 @@
     "writing tools",
     "manuscript",
     "session",
-    "book"
+    "book",
+    "goals",
+    "writing goals"
   ],
   "activationEvents": [
     "onCommand:codex-manuscript-wordcount.show",
-    "onView:${id}"
+    "onView:${id}",
+    "onStartupFinished"
   ],
   "main": "./src/extension.js",
   "contributes": {
