@@ -3,7 +3,7 @@
   "displayName": "Codex Manuscript Wordcount",
   "description": "Show manuscript and session word counts and goals.",
   "publisher": "ZenBrewismBooks",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": "https://github.com/nephlm/codex-manuscript-wordcount",
   "icon": "logo.png",
   "engines": {
