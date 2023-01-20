@@ -33,6 +33,7 @@ All of these settings are stored in the workspace config, and you can edit them 
 ## Author
 
 [@nephlm](https://www.github.com/nephlm)
+
 [Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
 
 ## License
