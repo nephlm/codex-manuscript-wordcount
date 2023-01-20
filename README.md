@@ -9,6 +9,7 @@ A VScode extension for counting the total word count of a manuscript split into 
 - Manuscript word count
 - Configurable manuscript and session goals
 - Does not count words between < and >
+- Progress bars for manuscript and session goals
 
 ## Installation
 
@@ -29,6 +30,11 @@ All of these settings are stored in the workspace config, and you can edit them 
 - Changing the document root while in the middle of a session may cause the session count to become inaccurate.
 - Only supports workspaces with one root.
 
+## Author
+
+[@nephlm](https://www.github.com/nephlm)
+[Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -37,10 +43,6 @@ All of these settings are stored in the workspace config, and you can edit them 
 
 - [Codex Autocommit](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-autocommit&ssr=false#overview) - Automatically takes a snapshot of the manuscript every interval and stores it on a remote git server.
 
-## Author
-
-[@nephlm](https://www.github.com/nephlm)
-
 ## Logo
 
-by [Lorc](https://game-icons.net/1x1/delapouite/abacus.html) under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+by [Delapuite](https://game-icons.net/1x1/delapouite/abacus.html) under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)

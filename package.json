@@ -21,7 +21,10 @@
     "session",
     "book",
     "goals",
-    "writing goals"
+    "writing goals",
+    "fiction",
+    "novel",
+    "writer"
   ],
   "activationEvents": [
     "onCommand:codex-manuscript-wordcount.show",

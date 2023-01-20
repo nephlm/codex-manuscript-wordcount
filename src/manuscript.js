@@ -37,37 +37,22 @@ class Manuscript {
 
   async refresh() {
     if (this._refreshInProgress) {
-      // console.log("already running?");
-      // console.log(this._refreshInProgress);
       while (this._refreshInProgress) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      // console.log("someone else completed the refresh");
-      // Promise.all(refreshPromises);
     } else {
       try {
         this._refreshInProgress = true;
-        // console.log("clearing Cache");
         this._cache.clearCache();
 
-        //TODO: document root
         if (this.documentRoot.uri !== undefined)
           this.documentRoot = this.documentRoot.uri;
-        // console.log("docRoot: " + this.documentRoot);
-        // console.log(this.documentRoot);
-        // console.log(this.documentRoot.uri);
-        // console.log(vscode.workspace.workspaceFolders);
         var relativePath = getRelativePath(this.documentRoot);
-        // var relativePath = vscode.workspace.asRelativePath(this.documentRoot);
-        // console.log(this.documentRoot);
-        // console.log(relativePath);
-        // if (relativePath == this.documentRoot.path) relativePath = "";
         var glob = "**/*.md";
         if (relativePath !== "") glob = "/" + glob;
         const files = await vscode.workspace.findFiles(relativePath + glob);
 
         var refreshPromises = [];
-        // console.log("file count: " + files.length);
         for (const path of files) {
           const prom = this._counter.getWordCount(path).then((count) => {
             this._cache.setCache(path, count);
@@ -97,12 +82,9 @@ class Manuscript {
     } else {
       count = this._cache.cacheSum();
     }
-    // console.log(count);
-    // console.log(this._cache);
     if (isNaN(count)) {
       // not in the cache
       console.log("not in cache");
-      // console.log(this._cache._cache);
       this.refresh();
       return 0;
     }
@@ -132,7 +114,6 @@ class Manuscript {
       })
       .then(async (uriArray) => {
         if (this._validateDocumentRoot(uriArray)) {
-          // console.log(vscode.workspace.workspaceFolders);
           this.documentRoot = uriArray[0];
           var relativePath = getRelativePath(this.documentRoot);
           vscode.workspace
@@ -143,7 +124,6 @@ class Manuscript {
               vscode.ConfigurationTarget.Workspace
             );
           await this.refresh().then(() => {
-            // console.log("refresh called");
             vscode.window.showInformationMessage(
               "Resetting the root will have unexpected results on your session count, you may want to reset it, or set the starting count."
             );
@@ -157,7 +137,6 @@ class Manuscript {
     try {
       if (uriArray === undefined) return false;
       if (uriArray.length == 1) {
-        // console.log(uriArray);
       } else {
         vscode.window.showErrorMessage(
           "You may only choose one root for your manuscript"
