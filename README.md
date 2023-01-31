@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/logo.png" width=48>Codex Manuscript Wordcount
 
-A VScode extension for counting the total word count of a manuscript split into multiple markdown files. It also includes a session word count and configurable manuscript and session goals.
+A VScode extension for counting the **total word count of a manuscript split across multiple markdown files.** It also includes a session word count and configurable manuscript and session goals.
 
 ## Features
 
@@ -30,11 +30,14 @@ All of these settings are stored in the workspace config, and you can edit them 
 - Changing the document root while in the middle of a session may cause the session count to become inaccurate.
 - Only supports workspaces with one root.
 
+## Feedback
+
+[Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
+
 ## Author
 
 [@nephlm](https://www.github.com/nephlm)
 
-[Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
 
 ## License
 
@@ -43,6 +46,8 @@ All of these settings are stored in the workspace config, and you can edit them 
 ## Related
 
 - [Codex Autocommit](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-autocommit&ssr=false#overview) - Automatically takes a snapshot of the manuscript every interval and stores it on a remote git server.
+
+- [Codex Manuscript File Operations](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-manuscript-file-operations) - A set of file operations to facilitate splitting and merging scenes and to maintaining the fileorder of the manuscript.
 
 ## Logo
 

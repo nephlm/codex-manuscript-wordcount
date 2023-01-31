@@ -134,8 +134,8 @@ class Manuscript {
   }
 
   _validateDocumentRoot(uriArray) {
+    if (uriArray === undefined) return false;
     try {
-      if (uriArray === undefined) return false;
       if (uriArray.length == 1) {
       } else {
         vscode.window.showErrorMessage(
