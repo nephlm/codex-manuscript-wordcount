@@ -77,7 +77,7 @@
           "when": "view == codex-manuscript-wordcount_view && viewItem == session"
         },
         {
-          "command": "codex-manuscript-wordcount.setSessionStartCount",
+          "command": "codex-manuscript-wordcount.setSessionCount",
           "when": "view == codex-manuscript-wordcount_view && viewItem == session"
         },
         {
@@ -104,8 +104,8 @@
         "title": "Set Session Goal"
       },
       {
-        "command": "codex-manuscript-wordcount.setSessionStartCount",
-        "title": "Set Session Starting Count"
+        "command": "codex-manuscript-wordcount.setSessionCount",
+        "title": "Set Session Count"
       },
       {
         "command": "codex-manuscript-wordcount.setManuscriptGoal",

@@ -87,25 +87,26 @@ function activate(context) {
   );
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "codex-manuscript-wordcount.setSessionStartCount",
+      "codex-manuscript-wordcount.setSessionCount",
       function (e) {
-        console.log("setSessionStart");
+        console.log("setSessionCount");
         vscode.window
           .showInputBox({
             prompt:
               "This is the cheat box. ;-) " +
               "If you forgot to reset the session when you started working " +
-              "and would like to reset the start of the session " +
-              "to some value below the current manuscript count, you set it here.",
-            title: "Set Session Start Count",
+              "and would like credit for the words you already wrote, " +
+              "set the session to a non-zero value here.",
+            title: "Set Session Current Count",
           })
           .then((value) => {
             if (!isNaN(value)) {
-              treeProvider.session.startCount = value;
+              const startValue = treeProvider.manuscript.total() - value;
+              treeProvider.session.startCount = startValue;
               treeProvider.update();
               context.workspaceState.update(
                 "codexManuscriptWordcount.sessionStartValue",
-                value
+                startValue
               );
             }
           });

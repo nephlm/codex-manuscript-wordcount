@@ -21,7 +21,7 @@ After installation, the manuscript and session word counts will appear in the ex
 
 <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/screenshot.png" width=350>
 
-You can also reset the session or adjust the session start by right-clicking on the session count. Additionally, there is an option in the settings to automatically reset the session on restart, which is off by default.
+You can also reset the session or adjust the session count by right-clicking on the session count. Additionally, there is an option in the settings to automatically reset the session on restart, which is off by default.
 
 All of these settings are stored in the workspace config, and you can edit them there. However, there is no validation when editing them manually, so it may cause issues.
 
