@@ -1,4 +1,4 @@
-const progressBarLength = 25;
+const progressBarLength = 15;
 
 const progressBar = (current, goal) => {
   return _progressBar2({
@@ -13,7 +13,7 @@ const progressBar = (current, goal) => {
 
 const _progressBar = ({
   value,
-  length = 40,
+  length = progressBarLength,
   title = " ",
   vmin = 0.0,
   vmax = 1.0,
@@ -42,7 +42,7 @@ const _progressBar = ({
 
 const _progressBar2 = ({
   value,
-  length = 40,
+  length = 25,
   title = " ",
   vmin = 0.0,
   vmax = 1.0,
