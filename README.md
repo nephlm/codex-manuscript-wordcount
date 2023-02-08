@@ -10,6 +10,7 @@ A VScode extension for counting the **total word count of a manuscript split acr
 - Configurable manuscript and session goals
 - Does not count words between < and >
 - Progress bars for manuscript and session goals
+- Ignores files matching patterns in `.codexignore` file.
 
 ## Installation
 
@@ -25,6 +26,8 @@ You can also reset the session or adjust the session count by right-clicking on 
 
 All of these settings are stored in the workspace config, and you can edit them there. However, there is no validation when editing them manually, so it may cause issues.
 
+You may create a `.codexignore` file in the root of your workspace in the same [format](https://www.w3schools.com/git/git_ignore.asp?remote=github) used by [.gitignore](https://git-scm.com/docs/gitignore), and the word counter will ignore any files which match the ignore patterns.
+
 ## Limitations
 
 - Changing the document root while in the middle of a session may cause the session count to become inaccurate.
@@ -37,7 +40,6 @@ All of these settings are stored in the workspace config, and you can edit them 
 ## Author
 
 [@nephlm](https://www.github.com/nephlm)
-
 
 ## License
 

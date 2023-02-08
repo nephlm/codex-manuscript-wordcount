@@ -1,7 +1,9 @@
 const vscode = require("vscode");
-const { TItem, TreeProvider } = require("./tree-provider");
+const { TreeProvider } = require("./tree-provider");
 // const { WordCounterController } = require("./document-wordcounter");
-const { Manuscript } = require("./manuscript");
+// const { Manuscript } = require("./manuscript");
+
+var treeProvider;
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -12,8 +14,7 @@ function activate(context) {
   );
 
   let treeview;
-  let treeProvider = new TreeProvider(context);
-  // let wordCountController;
+  treeProvider = new TreeProvider(context);
 
   treeview = vscode.window.createTreeView("codex-manuscript-wordcount_view", {
     treeDataProvider: treeProvider,
@@ -54,6 +55,7 @@ function activate(context) {
                   vscode.ConfigurationTarget.Workspace
                 );
             }
+
           });
       }
     )
@@ -130,4 +132,5 @@ function deactivate() {}
 module.exports = {
   activate,
   deactivate,
+  treeProvider,
 };

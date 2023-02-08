@@ -1,7 +1,7 @@
-const { arrayBuffer } = require("stream/consumers");
 const vscode = require("vscode");
 const { Manuscript, Session } = require("./manuscript");
 const { Node } = require("./nodes");
+const { refreshRequiredEvent } = require("./events");
 const { progressBar, getProgressCharacter } = require("./progress");
 
 let rootId = 1;
@@ -187,6 +187,7 @@ class TreeProvider {
 
     let subscriptions = [];
     const boundOnEvent = this._onEvent.bind(this);
+    vscode.workspace.onDidSaveTextDocument(boundOnEvent, this, subscriptions);
     vscode.window.onDidChangeActiveTextEditor(
       boundOnEvent,
       this,
@@ -199,6 +200,13 @@ class TreeProvider {
     );
     vscode.workspace.onDidDeleteFiles(async () => {
       this.manuscript.refresh().then(() => this._onEvent());
+    });
+    refreshRequiredEvent.event(async () => {
+      // console.log("refresh requested");
+      this.manuscript.refresh().then(() => {
+        this._onEvent();
+        this.update();
+      });
     });
   }
 

@@ -2,10 +2,11 @@
 
 All notable changes to the "codex-manuscript-wordcount" extension will be documented in this file.
 
-## [Unreleased]
+## [0.4.0]
 
 - Shortened progress bar, so it should be about the length of the text.
-- Changed the option to set session starting count to the more reasonable `Set Session Start`
+- Changed the option to set session starting count to the more reasonable `Set Session Start` which directly sets the value of the session count rather than making the user do math.
+- Now honors a `.codexignore` file of the same format of `.gitignore` to skip files matching the patterns.  
 
 ## [0.3.0]
 

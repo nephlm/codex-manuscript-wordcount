@@ -1,7 +1,11 @@
+const { shouldIgnore, didIgnorePatternsChange } = require("./ignore");
 const vscode = require("vscode");
 
 class WordCounter {
   async getWordCount(path) {
+    if (shouldIgnore(path)) {
+      return 0;
+    }
     const doc = await vscode.workspace.openTextDocument(path);
     return this._getWordCountForDoc(doc);
   }
@@ -15,13 +19,14 @@ class WordCounter {
   }
 
   isDocInDocumentRoot(documentRoot, doc) {
-      return doc.uri.path.startsWith(documentRoot.path);
+    return doc.uri.path.startsWith(documentRoot.path);
   }
 
   getCurrentDocWordCount(documentRoot) {
     let editor = vscode.window.activeTextEditor;
     if (!editor) return 0;
     let doc = editor.document;
+    if (shouldIgnore(doc.uri)) return 0;
     if (!this.isDocInDocumentRoot(documentRoot, doc)) return 0;
     return this._getWordCountForDoc(doc);
   }
@@ -39,40 +44,6 @@ class WordCounter {
     return wordCount;
   }
 }
-
-// class WordCounterController {
-//   constructor(wordCounter) {
-//     this._wordCounter = wordCounter;
-//     if (this._wordCounter) {
-//       this.count = this._wordCounter.getCurrentDocWordCount();
-//     } else {
-//       this.count = 0;
-//     }
-//     this._disposable = null;
-
-//     let subscriptions = [];
-//     vscode.window.onDidChangeActiveTextEditor(
-//       this._onEvent,
-//       this,
-//       subscriptions
-//     );
-//     vscode.window.onDidChangeTextEditorSelection(
-//       this._onEvent,
-//       this,
-//       subscriptions
-//     );
-
-//     this._disposable = vscode.Disposable.from(...subscriptions);
-//   }
-
-//   _onEvent() {
-//     if (this._wordCounter)
-//       this.count = this._wordCounter.getCurrentDocWordCount();
-//   }
-//   dispose() {
-//     this._disposable.dispose();
-//   }
-// }
 
 module.exports = {
   WordCounter,
