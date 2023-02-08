@@ -33,24 +33,18 @@ You may create a `.codexignore` file in the root of your workspace in the same [
 - Changing the document root while in the middle of a session may cause the session count to become inaccurate.
 - Only supports workspaces with one root.
 
-## Feedback
-
-[Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
-
-## Author
-
-[@nephlm](https://www.github.com/nephlm)
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## Related
 
 - [Codex Autocommit](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-autocommit&ssr=false#overview) - Automatically takes a snapshot of the manuscript every interval and stores it on a remote git server.
 
 - [Codex Manuscript File Operations](https://marketplace.visualstudio.com/items?itemName=ZenBrewismBooks.codex-manuscript-file-operations) - A set of file operations to facilitate splitting and merging scenes and to maintaining the fileorder of the manuscript.
 
-## Logo
+## Feedback
 
-by [Delapuite](https://game-icons.net/1x1/delapouite/abacus.html) under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+[Bugs, feature requests and comments](https://github.com/nephlm/codex-manuscript-wordcount/issues)
+
+## License, Author and Logo Attribution
+
+- Author: [@nephlm](https://www.github.com/nephlm)
+- License: [MIT](https://choosealicense.com/licenses/mit/)
+- Logo by [Delapuite](https://game-icons.net/1x1/delapouite/abacus.html) under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
