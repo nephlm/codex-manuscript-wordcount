@@ -7,7 +7,10 @@ const utils = require("./utils");
 const { refreshRequiredEvent } = require("./events");
 
 const getIgnorePath = function () {
-  return vscode.Uri.joinPath(utils.workspaceRoot(), ".codexIgnore");
+  if (utils.workspaceRoot() === undefined) {
+    return undefined;
+  }
+  return vscode.Uri.joinPath(utils.workspaceRoot(), ".codexignore");
 };
 
 var ignorePath = getIgnorePath();
@@ -19,6 +22,13 @@ let subscriptions = [];
 // const boundOnEvent = this._onEvent.bind(this);
 vscode.workspace.onDidSaveTextDocument(
   (e) => {
+    if (!ignorePath) {
+      ignorePath = getIgnorePath();
+      return;
+    }
+    console.log(e.uri.fsPath)
+    console.log(ignorePath.fsPath)
+    console.log()
     if (e.uri.fsPath === ignorePath.fsPath) {
       // console.log("invalidating ignore cache");
       cache = undefined;

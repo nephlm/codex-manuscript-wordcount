@@ -8,10 +8,14 @@ var treeProvider;
 /**
  * @param {vscode.ExtensionContext} context
  */
-function activate(context) {
+async function activate(context) {
   console.log(
     'Congratulations, your extension "codex-manuscript-wordcount" is now active!'
   );
+  console.log(vscode.workspace);
+  while (!vscode.workspace.workspaceFolders) {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
 
   let treeview;
   treeProvider = new TreeProvider(context);
@@ -55,7 +59,6 @@ function activate(context) {
                   vscode.ConfigurationTarget.Workspace
                 );
             }
-
           });
       }
     )

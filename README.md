@@ -28,6 +28,8 @@ All of these settings are stored in the workspace config, and you can edit them 
 
 You may create a `.codexignore` file in the root of your workspace in the same [format](https://www.w3schools.com/git/git_ignore.asp?remote=github) used by [.gitignore](https://git-scm.com/docs/gitignore), and the word counter will ignore any files which match the ignore patterns.
 
+In general, each pattern should be `**/<directory>/**`.  One pattern per line.  Lines beginning with `#`, are considered comments and ignored.
+
 ## Limitations
 
 - Changing the document root while in the middle of a session may cause the session count to become inaccurate.

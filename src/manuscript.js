@@ -2,6 +2,7 @@ const vscode = require("vscode");
 
 const { CountCache } = require("./count-cache");
 const { WordCounter } = require("./document-wordcounter");
+const { workspaceRoot } = require("./utils");
 
 // let refreshPromises = [];
 
@@ -14,14 +15,17 @@ const getRelativePath = function (uri) {
 class Manuscript {
   constructor(documentRoot, goal, context) {
     this.context = context;
-    if (!documentRoot && vscode.workspace.workspaceFolders) {
-      this.documentRoot = vscode.workspace.workspaceFolders[0].uri;
+    this.documentRoot = undefined;
+    if (!documentRoot && workspaceRoot()) {
+      this.documentRoot = workspaceRoot();
     } else {
       const relative = vscode.workspace
         .getConfiguration()
         .get("codexManuscriptWordcount.defaultDocumentRoot");
-      this.documentRoot = vscode.workspace.workspaceFolders[0].uri;
-      this.documentRoot = vscode.Uri.joinPath(this.documentRoot, relative);
+      if (workspaceRoot() !== undefined) {
+        this.documentRoot = workspaceRoot();
+        this.documentRoot = vscode.Uri.joinPath(this.documentRoot, relative);
+      }
     }
     this.goal =
       goal ||
@@ -36,6 +40,9 @@ class Manuscript {
   }
 
   async refresh() {
+    if (!this.documentRoot) {
+      return undefined
+    }
     if (this._refreshInProgress) {
       while (this._refreshInProgress) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -104,33 +111,39 @@ class Manuscript {
   }
 
   async setDocumentRoot(callback) {
-    vscode.window
-      .showOpenDialog({
-        canSelectFolders: true,
-        canSelectMany: false,
-        defaultUri: vscode.workspace.workspaceFolders[0].uri,
-        openLabel: "set",
-        title: "Select the root folder of your manuscript",
-      })
-      .then(async (uriArray) => {
-        if (this._validateDocumentRoot(uriArray)) {
-          this.documentRoot = uriArray[0];
-          var relativePath = getRelativePath(this.documentRoot);
-          vscode.workspace
-            .getConfiguration()
-            .update(
-              "codexManuscriptWordcount.defaultDocumentRoot",
-              relativePath,
-              vscode.ConfigurationTarget.Workspace
-            );
-          await this.refresh().then(() => {
-            vscode.window.showInformationMessage(
-              "Resetting the root will have unexpected results on your session count, you may want to reset it, or set the starting count."
-            );
-            callback();
-          });
-        }
-      });
+    if (workspaceRoot() === undefined) {
+      vscode.window.showErrorMessage(
+        "Can not set DocumentRoot until a workspace is opened."
+      );
+    } else {
+      vscode.window
+        .showOpenDialog({
+          canSelectFolders: true,
+          canSelectMany: false,
+          defaultUri: workspaceRoot(),
+          openLabel: "set",
+          title: "Select the root folder of your manuscript",
+        })
+        .then(async (uriArray) => {
+          if (this._validateDocumentRoot(uriArray)) {
+            this.documentRoot = uriArray[0];
+            var relativePath = getRelativePath(this.documentRoot);
+            vscode.workspace
+              .getConfiguration()
+              .update(
+                "codexManuscriptWordcount.defaultDocumentRoot",
+                relativePath,
+                vscode.ConfigurationTarget.Workspace
+              );
+            await this.refresh().then(() => {
+              vscode.window.showInformationMessage(
+                "Resetting the root will have unexpected results on your session count, you may want to reset it, or set the starting count."
+              );
+              callback();
+            });
+          }
+        });
+    }
   }
 
   _validateDocumentRoot(uriArray) {

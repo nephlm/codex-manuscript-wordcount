@@ -19,7 +19,10 @@ class WordCounter {
   }
 
   isDocInDocumentRoot(documentRoot, doc) {
-    return doc.uri.path.startsWith(documentRoot.path);
+    if (doc.uri && documentRoot) {
+      return doc.uri.fsPath.startsWith(documentRoot.fsPath);
+    }
+    return false;
   }
 
   getCurrentDocWordCount(documentRoot) {

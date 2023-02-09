@@ -2,6 +2,11 @@
 
 All notable changes to the "codex-manuscript-wordcount" extension will be documented in this file.
 
+## [0.4.2]
+
+- Armored against windows with no workspace open.  May still be some issues there.
+- Squashed a bug that would spit out tracebacks, though I don't think it would have any functional impact.  
+
 ## [0.4.0]
 
 - Shortened progress bar, so it should be about the length of the text.
@@ -15,4 +20,4 @@ All notable changes to the "codex-manuscript-wordcount" extension will be docume
 
 ## [0.2.0]
 
-- Initial release
+- Initial release 

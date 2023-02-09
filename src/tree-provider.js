@@ -2,6 +2,7 @@ const vscode = require("vscode");
 const { Manuscript, Session } = require("./manuscript");
 const { Node } = require("./nodes");
 const { refreshRequiredEvent } = require("./events");
+const utils = require("./utils");
 const { progressBar, getProgressCharacter } = require("./progress");
 
 let rootId = 1;
@@ -113,16 +114,16 @@ class TItem extends vscode.TreeItem {
 
     let subscriptions = [];
 
-    vscode.window.onDidChangeActiveTextEditor(
-      this._onEvent,
-      this,
-      subscriptions
-    );
-    vscode.window.onDidChangeTextEditorSelection(
-      this._onEvent,
-      this,
-      subscriptions
-    );
+    // vscode.window.onDidChangeActiveTextEditor(
+    //   this._onEvent,
+    //   this,
+    //   subscriptions
+    // );
+    // vscode.window.onDidChangeTextEditorSelection(
+    //   this._onEvent,
+    //   this,
+    //   subscriptions
+    // );
 
     this._disposable = vscode.Disposable.from(...subscriptions);
   }
@@ -144,24 +145,6 @@ const nodeToTItem = function (node, arg, collapsibleState) {
   const newTItem = new TItem(node.label(arg), node.id, collapsibleState);
   return newTItem;
 };
-
-// let topLevel = [manuscriptId, sessionId];
-// let sessionArray = [sessionId, sessionCountId];
-
-// let manuscriptItem = new TItem({ label: "Manuscript", id: manuscriptId });
-// let sessionItem = new TItem({ label: "Session", id: sessionId });
-
-// let struct = {
-//   [manuscriptItem.id]: [
-//     new TItem({ label: "Manuscript Progress: ", id: manuscriptCountId }),
-//   ],
-//   [manuscriptCountId]: [],
-//   [sessionItem.id]: [
-//     new TItem({ label: "Session Progress: ", id: sessionCountId }),
-//   ],
-//   [sessionCountId]: [],
-//   null: [manuscriptItem, sessionItem],
-// };
 
 //========================================================================
 
@@ -198,16 +181,30 @@ class TreeProvider {
       this,
       subscriptions
     );
-    vscode.workspace.onDidDeleteFiles(async () => {
-      this.manuscript.refresh().then(() => this._onEvent());
-    });
-    refreshRequiredEvent.event(async () => {
-      // console.log("refresh requested");
-      this.manuscript.refresh().then(() => {
-        this._onEvent();
-        this.update();
-      });
-    });
+    vscode.workspace.onDidDeleteFiles(
+      async () => {
+        this.manuscript.refresh().then(() => this._onEvent());
+      },
+      this,
+      subscriptions
+    );
+    refreshRequiredEvent.event(
+      async () => {
+        // console.log("refresh requested");
+        this.manuscript.refresh().then(() => {
+          this._onEvent();
+          this.update();
+        });
+      },
+      this,
+      subscriptions
+    );
+
+    this._disposable = vscode.Disposable.from(...subscriptions);
+  }
+
+  dispose() {
+    this._disposable.dispose();
   }
 
   setDocumentRoot() {
@@ -249,20 +246,12 @@ class TreeProvider {
       items.push(nodeToTItem(child, args));
     }
     return items;
-
-    // return struct[element.id];
   }
 
   getParent(element) {
     const node = nodeIndex[element.id];
     const args = this.getLabelArg();
     return nodeToTItem(node, args);
-    // if (element.id === manuscriptCountId) {
-    //   return manuscriptItem;
-    // } else if (element.id === sessionCountId) {
-    //   return sessionItem;
-    // }
-    // return null;
   }
 
   // =======================================================================
@@ -275,6 +264,9 @@ class TreeProvider {
   _onEvent() {
     if (this === undefined) {
       return;
+    }
+    if (!this.manuscript.documentRoot && utils.workspaceRoot()) {
+      this.manuscript.documentRoot = utils.workspaceRoot();
     }
     let oldTotal = this.total;
     const total = this.manuscript.total(true);
