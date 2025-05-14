@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/logo.png" width=48>Codex Manuscript Wordcount
 
-A VScode extension for counting the **total word count of a manuscript split across multiple markdown files.** It also includes a session word count and configurable manuscript and session goals.
+A VScode extension for counting the **total word count of a manuscript split across multiple files.** It also includes a session word count and configurable manuscript and session goals.
 
 ## Features
 
@@ -11,6 +11,7 @@ A VScode extension for counting the **total word count of a manuscript split acr
 - Does not count words between < and >
 - Progress bars for manuscript and session goals
 - Ignores files matching patterns in `.codexignore` file.
+- Choose one or more file globs.
 
 ## Installation
 
@@ -23,6 +24,8 @@ After installation, the manuscript and session word counts will appear in the ex
 <img src="https://raw.githubusercontent.com/nephlm/codex-manuscript-wordcount/main/screenshot.png" width=350>
 
 You can also reset the session or adjust the session count by right-clicking on the session count. Additionally, there is an option in the settings to automatically reset the session on restart, which is off by default.
+
+By default, the extension only counts markdown files ending in `.md`, this is controlled by the `Glob Patterns` configuration item.  Multiple globs can be added to this list.  The globs should be in the form `*.ext`.  In some cases the glob is prepended with `**/`.  Although more complex patterns should work, they are untested.
 
 All of these settings are stored in the workspace config, and you can edit them there. However, there is no validation when editing them manually, so it may cause issues.
 

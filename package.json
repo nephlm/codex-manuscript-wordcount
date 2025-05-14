@@ -3,7 +3,7 @@
   "displayName": "Codex Manuscript Wordcount",
   "description": "Show manuscript and session word counts and goals.",
   "publisher": "ZenBrewismBooks",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "repository": "https://github.com/nephlm/codex-manuscript-wordcount",
   "icon": "logo.png",
   "engines": {
@@ -66,6 +66,16 @@
             "type": "boolean",
             "default": false,
             "description": "Should the session automatically reset when vscode is restarted or the window is reloaded?"
+          },
+          "codexManuscriptWordcount.globPatterns": {
+            "type": "array",
+            "default": [
+              "*.md"
+            ],
+            "description": "These are the glob patterns used to determine which files to include in the manuscript wordcount.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

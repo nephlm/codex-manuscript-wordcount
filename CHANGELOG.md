@@ -2,6 +2,11 @@
 
 All notable changes to the "codex-manuscript-wordcount" extension will be documented in this file.
 
+## [0.5.0]
+
+- Added Glob Patterns configuration list so the user can specify which file extensions should be included in the wordcount, this allows counting files other than Markdown.  ( https://github.com/nephlm/codex-manuscript-wordcount/issues/6 )
+
+
 ## [0.4.2]
 
 - Armored against windows with no workspace open.  May still be some issues there.

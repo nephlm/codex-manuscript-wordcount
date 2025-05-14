@@ -41,7 +41,7 @@ class Manuscript {
 
   async refresh() {
     if (!this.documentRoot) {
-      return undefined
+      return undefined;
     }
     if (this._refreshInProgress) {
       while (this._refreshInProgress) {
@@ -55,9 +55,26 @@ class Manuscript {
         if (this.documentRoot.uri !== undefined)
           this.documentRoot = this.documentRoot.uri;
         var relativePath = getRelativePath(this.documentRoot);
-        var glob = "**/*.md";
-        if (relativePath !== "") glob = "/" + glob;
-        const files = await vscode.workspace.findFiles(relativePath + glob);
+        var xglob = vscode.workspace
+          .getConfiguration()
+          .get("codexManuscriptWordcount.globPatterns") || ["*.md"];
+        console.log(xglob);
+
+        const fileSet = new Set();
+
+        for (var pattern of xglob) {
+          pattern = "**/" + pattern;
+          if (relativePath !== "") pattern = "/" + pattern;
+          const matches = await vscode.workspace.findFiles(
+            relativePath + pattern
+          );
+          for (const file of matches) {
+            fileSet.add(file.toString());
+          }
+        }
+        const files = Array.from(fileSet).map((uriStr) =>
+          vscode.Uri.parse(uriStr)
+        );
 
         var refreshPromises = [];
         for (const path of files) {

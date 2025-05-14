@@ -1,3 +1,4 @@
+const minimatch = require("minimatch");
 const { shouldIgnore, didIgnorePatternsChange } = require("./ignore");
 const vscode = require("vscode");
 
@@ -11,11 +12,7 @@ class WordCounter {
   }
 
   _getWordCountForDoc(doc) {
-    if (doc.languageId == "markdown") {
-      return this._getWordCount(doc);
-    } else {
-      return 0;
-    }
+    return this._getWordCount(doc);
   }
 
   isDocInDocumentRoot(documentRoot, doc) {
@@ -31,6 +28,17 @@ class WordCounter {
     let doc = editor.document;
     if (shouldIgnore(doc.uri)) return 0;
     if (!this.isDocInDocumentRoot(documentRoot, doc)) return 0;
+
+    const xglob = vscode.workspace
+      .getConfiguration()
+      .get("codexManuscriptWordcount.globPatterns") || ["*.md"];
+
+    if (
+      !xglob.some((pattern) =>
+        minimatch(vscode.workspace.asRelativePath(doc.uri.fsPath), pattern)
+      )
+    )
+      return 0;
     return this._getWordCountForDoc(doc);
   }
 
