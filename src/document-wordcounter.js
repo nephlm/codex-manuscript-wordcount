@@ -35,7 +35,10 @@ class WordCounter {
 
     if (
       !xglob.some((pattern) =>
-        minimatch(vscode.workspace.asRelativePath(doc.uri.fsPath), pattern)
+        minimatch(
+          vscode.workspace.asRelativePath(doc.uri.fsPath),
+          "**/" + pattern
+        )
       )
     )
       return 0;
